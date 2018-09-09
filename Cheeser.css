@@ -1,0 +1,9 @@
+.webpageArea {
+  background-color: rgb(138, 93, 63);
+}
+.gameArea {
+  border: 1px solid rgb(8, 2, 41);
+  margin: auto;
+  display: block;
+  margin-top: 25px;
+}
