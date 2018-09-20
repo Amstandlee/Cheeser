@@ -20,6 +20,9 @@ const Props = [
   { size: 135, x: 0, y: 117, speed: 5 }
 ];
 
+/*This is based on code from w3Schools.
+https://www.w3schools.com/graphics/tryit.asp?filename=trygame_component_more_move*/
+
 /**
  * Creates new entities on the canvas.
  * @param {int} width of object.
@@ -95,6 +98,7 @@ function moveAllEntities() {
       checkForEach(lane, i);
     }
   });
+  checkForPlayerMove();
 }
 
 /**
