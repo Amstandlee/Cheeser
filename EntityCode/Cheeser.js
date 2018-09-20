@@ -20,7 +20,14 @@ let gameMap = {
    */
   start: function() {
     generateAllLanes();
+    player = newPlayer(playerProp.size, playerProp.x, playerProp.y);
     this.interval = setInterval(moveAllEntities, 20);
+    window.addEventListener("keydown", function(e) {
+      gameMap.key = e.keyCode;
+    });
+    window.addEventListener("keyup", function(e) {
+      gameMap.key = false;
+    });
   }
 };
 
