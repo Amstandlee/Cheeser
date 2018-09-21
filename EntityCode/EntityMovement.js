@@ -130,10 +130,7 @@ function checkForEach(entity, index) {
  * @param {int} x is the x coordinate
  */
 function checkRightMove(x) {
-  let outOfBounds = false;
-  if (x >= canvasWidth) {
-    outOfBounds = true;
-  }
+  let outOfBounds = x >= canvasWidth ? true : false;
   return outOfBounds;
 }
 
@@ -146,9 +143,6 @@ function checkRightMove(x) {
  * to fully leave the screen.
  */
 function checkLeftMove(x, size) {
-  let outOfBounds = false;
-  if (x < 0 - size) {
-    outOfBounds = true;
-  }
+  let outOfBounds = x < 0 - size ? true : false;
   return outOfBounds;
 }
