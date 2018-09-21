@@ -18,7 +18,7 @@ function newPlayer(size, x, y) {
 }
 
 /*Moves the player object up by 48 pixels*/
-function playerUp(up, w, safe) {
+function playerUp(up, w) {
   if ((gameMap.key && gameMap.key == up) || gameMap.key == w) {
     gameMap.key = false;
     player.y -= 48;
@@ -27,7 +27,7 @@ function playerUp(up, w, safe) {
 }
 
 /*Moves the player object down by 48 pixels*/
-function playerDown(down, s, safe) {
+function playerDown(down, s) {
   if ((gameMap.key && gameMap.key == down) || gameMap.key == s) {
     gameMap.key = false;
     player.y += 48;
