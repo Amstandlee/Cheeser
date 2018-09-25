@@ -8,16 +8,16 @@ const height = 45;
 
 /*This is the width, x coordinate, and y coordinate of each non-player entity.*/
 const Props = [
-  { size: 45, x: 0, y: 599, speed: 2 },
-  { size: 45, x: 0, y: 551, speed: 3 },
-  { size: 45, x: 0, y: 503, speed: 3 },
-  { size: 45, x: 0, y: 455, speed: 2 },
-  { size: 45, x: 0, y: 407, speed: 4 },
-  { size: 90, x: 0, y: 309, speed: 2 },
-  { size: 90, x: 0, y: 261, speed: 4 },
-  { size: 180, x: 0, y: 213, speed: 3 },
-  { size: 90, x: 0, y: 165, speed: 4 },
-  { size: 135, x: 0, y: 117, speed: 5 }
+  { size: 45, x: 0, y: 599, speed: 1 },
+  { size: 45, x: 0, y: 551, speed: 2 },
+  { size: 45, x: 0, y: 503, speed: 2 },
+  { size: 45, x: 0, y: 455, speed: 3 },
+  { size: 90, x: 0, y: 407, speed: 4 },
+  { size: 90, x: 0, y: 309, speed: 1 },
+  { size: 135, x: 0, y: 261, speed: 1 },
+  { size: 180, x: 0, y: 213, speed: 1 },
+  { size: 90, x: 0, y: 165, speed: 1 },
+  { size: 135, x: 0, y: 117, speed: 1 }
 ];
 
 /*This is based on code from w3Schools.
@@ -61,6 +61,7 @@ function generateAllLanes() {
   randomPos();
   lane1();
   lane6();
+  cutTheCheese();
 }
 
 /**
@@ -69,7 +70,7 @@ function generateAllLanes() {
  */
 function randomPos() {
   Props.forEach(function(i) {
-    i.x = Math.floor(Math.random() * (6 - 4) + 4) * 100;
+    i.x = Math.floor(Math.random() * (6 - 1) + 1) * 100;
   });
 }
 
@@ -79,8 +80,8 @@ function randomPos() {
  * @param {*} size is the width of the entity.
  * @param {*} x is the x coordinate on the canvas.
  */
-function newEntity(y, size, x) {
-  let returnedEntity = new entityCreation(size, height, "red", x, y);
+function newEntity(y, size, x, color) {
+  let returnedEntity = new entityCreation(size, height, color, x, y);
   return returnedEntity;
 }
 
@@ -88,40 +89,48 @@ function newEntity(y, size, x) {
  * Creates 3 entities in lanes 1-5
  */
 function lane1() {
-  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x));
-  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x));
-  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x));
-  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x));
-  lanes5.push(newEntity(Props[4].y, Props[4].size, Props[4].x));
-  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x - 200));
-  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x - 200));
-  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x - 200));
-  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x - 200));
-  lanes5.push(newEntity(Props[4].y, Props[4].size, Props[4].x - 200));
-  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x - 400));
-  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x - 400));
-  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x - 400));
-  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x - 400));
-  lanes5.push(newEntity(Props[4].y, Props[4].size, Props[4].x - 400));
+  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x, "orange"));
+  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x, "orange"));
+  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x, "orange"));
+  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x, "orange"));
+  lanes5.push(newEntity(Props[4].y, Props[4].size, Props[4].x, "orange"));
+  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x - 200, "orange"));
+  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x - 200, "orange"));
+  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x - 200, "orange"));
+  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x - 175, "orange"));
+  lanes5.push(newEntity(Props[4].y, Props[4].size, Props[4].x - 400, "orange"));
+  lanes5.push(newEntity(Props[0].y, Props[0].size, Props[0].x - 400, "orange"));
+  lanes5.push(newEntity(Props[1].y, Props[1].size, Props[1].x - 400, "orange"));
+  lanes5.push(newEntity(Props[2].y, Props[2].size, Props[2].x - 400, "orange"));
+  lanes5.push(newEntity(Props[3].y, Props[3].size, Props[3].x - 350, "orange"));
 }
 
 /**
- * Creates 3 entities in lanes 6-10
+ * Populates canvas with non-enemy entities.
  */
 function lane6() {
-  lanes10.push(newEntity(Props[5].y, Props[5].size, Props[5].x));
-  lanes10.push(newEntity(Props[6].y, Props[6].size, Props[6].x));
-  lanes10.push(newEntity(Props[7].y, Props[7].size, Props[7].x));
-  lanes10.push(newEntity(Props[8].y, Props[8].size, Props[8].x));
-  lanes10.push(newEntity(Props[9].y, Props[9].size, Props[9].x));
-  lanes10.push(newEntity(Props[5].y, Props[5].size, Props[5].x - 200));
-  lanes10.push(newEntity(Props[6].y, Props[6].size, Props[6].x - 200));
-  lanes10.push(newEntity(Props[7].y, Props[7].size, Props[7].x - 300));
-  lanes10.push(newEntity(Props[8].y, Props[8].size, Props[8].x - 200));
-  lanes10.push(newEntity(Props[9].y, Props[9].size, Props[9].x - 200));
-  lanes10.push(newEntity(Props[5].y, Props[5].size, Props[5].x - 400));
-  lanes10.push(newEntity(Props[6].y, Props[6].size, Props[6].x - 400));
-  lanes10.push(newEntity(Props[7].y, Props[7].size, Props[7].x - 500));
-  lanes10.push(newEntity(Props[8].y, Props[8].size, Props[8].x - 400));
-  lanes10.push(newEntity(Props[9].y, Props[9].size, Props[9].x - 400));
+  lanes10.push(newEntity(Props[5].y, Props[5].size, 0, "green"));
+  lanes10.push(newEntity(Props[5].y, Props[5].size, 190, "green"));
+  lanes10.push(newEntity(Props[5].y, Props[5].size, 380, "green"));
+  lanes10.push(newEntity(Props[5].y, Props[5].size, 570, "green"));
+  lanes10.push(newEntity(Props[6].y, Props[6].size, 0, "green"));
+  lanes10.push(newEntity(Props[6].y, Props[6].size, 235, "green"));
+  lanes10.push(newEntity(Props[6].y, Props[6].size, 470, "green"));
+  lanes10.push(newEntity(Props[7].y, Props[7].size, 0, "green"));
+  lanes10.push(newEntity(Props[7].y, Props[7].size, 280, "green"));
+  lanes10.push(newEntity(Props[7].y, Props[7].size, 560, "green"));
+  lanes10.push(newEntity(Props[8].y, Props[8].size, 0, "green"));
+  lanes10.push(newEntity(Props[8].y, Props[8].size, 190, "green"));
+  lanes10.push(newEntity(Props[8].y, Props[8].size, 380, "green"));
+  lanes10.push(newEntity(Props[9].y, Props[9].size, 0, "green"));
+  lanes10.push(newEntity(Props[9].y, Props[9].size, 235, "green"));
+  lanes10.push(newEntity(Props[9].y, Props[9].size, 470, "green"));
+}
+
+function cutTheCheese() {
+  cheeses.push(newEntity(56, 45, 47, "yellow"));
+  cheeses.push(newEntity(56, 45, 182, "yellow"));
+  cheeses.push(newEntity(56, 45, 316, "yellow"));
+  cheeses.push(newEntity(56, 45, 450, "yellow"));
+  cheeses.push(newEntity(56, 45, 584, "yellow"));
 }
