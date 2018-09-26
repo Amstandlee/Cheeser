@@ -16,7 +16,7 @@ let livesImages = [];
 to make*/
 const PLAYERPROP = { x: 315, y: 645, size: 45, collision: false };
 
-let playerMove = { max: playerProp.y };
+let playerMove = { max: PLAYERPROP.y };
 
 /**
  * Creates a new player object.
@@ -25,7 +25,7 @@ let playerMove = { max: playerProp.y };
  * @param {int} y is the starting y coordinate of the player.
  */
 function newPlayer(size, x, y) {
-  let returnedPlayer = new entityCreation(size, height, 'sienna', x, y);
+  let returnedPlayer = new entityCreation(size, HEIGHT, 'sienna', x, y);
   return returnedPlayer;
 }
 
@@ -103,8 +103,8 @@ function checkForPlayerMove() {
     /*If arrows or wasd were pressed, then check where the potential
     move will end up. If off of the canvas, then the move doesn't occur.*/
   } else {
-    player.y - 48 < playerProp.size ? player.update() : playerUp(38, 87);
-    player.y == playerProp.y ? player.update() : playerDown(40, 83);
+    player.y - 48 < PLAYERPROP.size ? player.update() : playerUp(38, 87);
+    player.y == PLAYERPROP.y ? player.update() : playerDown(40, 83);
     player.x - 45 < 0 ? player.update() : playerLeft(37, 65);
     player.x + 45 > CANVASWIDTH ? player.update() : playerRight(39, 68);
   }

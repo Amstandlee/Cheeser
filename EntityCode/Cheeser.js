@@ -60,7 +60,7 @@ let gameMap = {
    */
   start: function () {
     generateAllLanes();
-    player = newPlayer(playerProp.size, playerProp.x, playerProp.y);
+    player = newPlayer(PLAYERPROP.size, PLAYERPROP.x, PLAYERPROP.y);
     timer = new timeLeft();
     scoreImage = new scoreKeep('Current Score: ', score, 30, 26);
     highScoreImage = new scoreKeep('High Score: ', highScore, 230, 26);
@@ -79,8 +79,8 @@ let gameMap = {
       cheesesSaved++;
       cheeses.splice(index, 1);
       countDown.gotCheese();
-      player.x = playerProp.x;
-      player.y = playerProp.y;
+      player.x = PLAYERPROP.x;
+      player.y = PLAYERPROP.y;
       countDown.toDeath();
       if (cheesesSaved == 5) {
         cheeses.splice(index, 1);
@@ -97,8 +97,8 @@ let gameMap = {
   /*The player has died. Respawn*/
   dead: function () {
     if (lives > 0) {
-      player.x = playerProp.x;
-      player.y = playerProp.y;
+      player.x = PLAYERPROP.x;
+      player.y = PLAYERPROP.y;
       lives--;
       time = 60;
       livesImages.pop();
@@ -148,7 +148,7 @@ let countDown = {
     clearInterval(this.timer);
     score += calculateBonus();
     scoreImage.update(score);
-    playerMove.max = playerProp.y;
+    playerMove.max = PLAYERPROP.y;
     time = 60;
   }
 };
@@ -163,11 +163,11 @@ function timeLeft() {
   let canvas = document.getElementById('kitchen');
   let ctx = canvas.getContext('2d');
   ctx.font = '20px Arial';
-  ctx.fillText('Time until death: ' + time, playerProp.x, 734);
+  ctx.fillText('Time until death: ' + time, PLAYERPROP.x, 734);
   this.update = function () {
     ctx.font = '20px Arial';
     ctx.fillStyle = 'white';
-    ctx.fillText('Time until death: ' + time, playerProp.x, 734);
+    ctx.fillText('Time until death: ' + time, PLAYERPROP.x, 734);
   };
 }
 
