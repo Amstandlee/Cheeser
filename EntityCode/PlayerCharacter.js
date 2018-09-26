@@ -1,4 +1,7 @@
-"use strict";
+'use strict';
+/**
+ * This file contains all code that relate to player movement and collision.
+ */
 
 /*This is the player object*/
 let player;
@@ -11,7 +14,7 @@ let livesImages = [];
 
 /*This stores the properties of the player object
 to make*/
-const playerProp = { x: 315, y: 645, size: 45, collision: false };
+const PLAYERPROP = { x: 315, y: 645, size: 45, collision: false };
 
 let playerMove = { max: playerProp.y };
 
@@ -22,14 +25,28 @@ let playerMove = { max: playerProp.y };
  * @param {int} y is the starting y coordinate of the player.
  */
 function newPlayer(size, x, y) {
-  let returnedPlayer = new entityCreation(size, height, "white", x, y);
+  let returnedPlayer = new entityCreation(size, height, 'sienna', x, y);
   return returnedPlayer;
 }
 
+/**
+ * This function draws the squares that represent the player's lives.
+ */
 function drawLives() {
-  livesImages.push(new entityCreation(10, 10, "white", 10, 724));
-  livesImages.push(new entityCreation(10, 10, "white", 30, 724));
-  livesImages.push(new entityCreation(10, 10, "white", 50, 724));
+  livesImages.push(new entityCreation(10, 10, 'sienna', 10, 724));
+  livesImages.push(new entityCreation(10, 10, 'sienna', 30, 724));
+  livesImages.push(new entityCreation(10, 10, 'sienna', 50, 724));
+}
+
+/**
+ * This function will draw a new life for the player when they beat a round
+ * if they have less than 3 lives left.
+ */
+function newLifeDraw() {
+  let nextX = livesImages.length - 1;
+  livesImages.push(
+    new entityCreation(10, 10, 'sienna', livesImages[nextX].x + 20, 724)
+  );
 }
 
 /*Moves the player object up by 48 pixels*/
@@ -89,7 +106,7 @@ function checkForPlayerMove() {
     player.y - 48 < playerProp.size ? player.update() : playerUp(38, 87);
     player.y == playerProp.y ? player.update() : playerDown(40, 83);
     player.x - 45 < 0 ? player.update() : playerLeft(37, 65);
-    player.x + 45 > canvasWidth ? player.update() : playerRight(39, 68);
+    player.x + 45 > CANVASWIDTH ? player.update() : playerRight(39, 68);
   }
 }
 
@@ -99,7 +116,7 @@ function checkForEnemyCollision() {
   let bottom = player.y + player.height;
   let left = player.x;
   let right = player.x + player.width;
-  lanes5.forEach(function(entity) {
+  lanes5.forEach(function (entity) {
     let othTop = entity.y;
     let othBottom = entity.y + entity.height;
     let othLeft = entity.x;
@@ -146,11 +163,11 @@ function checkForStaticObjectCollision(array) {
 function sinkTraversal(y, entity) {
   if (y < 357 && y > 56) {
     if (checkForStaticObjectCollision(lanes10) >= 0) {
-      y == Props[5].y ? moveLeft(5, entity, 1) : y;
-      y == Props[6].y ? moveRight(6, entity, 1) : y;
-      y == Props[7].y ? moveLeft(7, entity, 1) : y;
-      y == Props[8].y ? moveRight(8, entity, 1) : y;
-      y == Props[9].y ? moveLeft(9, entity, 1) : y;
+      y == PROPS[5].y ? moveLeft(5, entity, 1) : y;
+      y == PROPS[6].y ? moveRight(6, entity, 1) : y;
+      y == PROPS[7].y ? moveLeft(7, entity, 1) : y;
+      y == PROPS[8].y ? moveRight(8, entity, 1) : y;
+      y == PROPS[9].y ? moveLeft(9, entity, 1) : y;
     } else if (checkForStaticObjectCollision(cheeses) >= 0) {
       gameMap.save(checkForStaticObjectCollision(cheeses));
     } else {
@@ -159,6 +176,11 @@ function sinkTraversal(y, entity) {
   }
 }
 
+/**
+ * Updates the current highest move.
+ * This is used to give the player score per move.
+ * @param {coordinate} y
+ */
 function updateMaxMove(y) {
   playerMove.max = y;
   score += 10;
